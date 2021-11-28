@@ -1,0 +1,27 @@
+name: Doodle
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 12 * * *' # at the end of each day
+jobs:
+  doodle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: true
+          ref: main
+      - name: Checkout commit
+        run: |
+          ls -las
+          git config --global user.email "you@example.com"
+          git config --global user.name "Github Action
+          pip3 install requirements.txt
+          python3 read.py
+          git add README.md
+          git commit -m "update"
+          git push
