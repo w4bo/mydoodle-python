@@ -20,7 +20,7 @@ jobs:
           ls -las
           git config --global user.email "you@example.com"
           git config --global user.name "Github Action"
-          pip3 install requirements.txt
+          pip3 install -r requirements.txt
           python3 read.py
           git add README.md
           git commit -m "update"
