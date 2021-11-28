@@ -20,4 +20,4 @@ df = df[["date", "week", "day", "text"] + [x for x in df.columns if "p_" in x]]
 df["s"] = df[[x for x in df.columns if "p_" in x]].agg(', '.join, axis=1).apply(lambda x: re.sub(' +', ' ', x.replace(',', '')).strip())
 df = df[df["s"].apply(lambda x: x != "")]
 print(df[["week", "date", "day", "text", "s"]].to_markdown())
-df.apply(lambda x: "- " str(x["date"].strftime("%d/%m/%Y")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("README.md", index=False, header=False)
+df.apply(lambda x: "- " + str(x["date"].strftime("%d/%m/%Y")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("README.md", index=False, header=False)
