@@ -26,6 +26,8 @@ jobs:
           git add README.md
           git commit -m "update"
           git push
+      - name: Export turni
+        run: |
           export CHANGELOG="$(cat README.md)"
           echo "$CHANGELOG"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
@@ -42,4 +44,5 @@ jobs:
             Ciao Nasi!
             
             Ecco i turni della settimana:
+            
             ${{ steps.fileaction.outputs.FILE }}
