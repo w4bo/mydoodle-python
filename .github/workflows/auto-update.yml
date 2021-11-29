@@ -19,14 +19,15 @@ jobs:
         continue-on-error: true
         run: |
           ls -las
-          git config --global user.email "you@example.com"
-          git config --global user.name "Github Action"
-          pip3 install -r requirements.txt
-          python3 read.py
-          git add README.md
-          git commit -m "update"
-          git push
+          # git config --global user.email "you@example.com"
+          # git config --global user.name "Github Action"
+          # pip3 install -r requirements.txt
+          # python3 read.py
+          # git add README.md
+          # git commit -m "update"
+          # git push
           echo "TESTVAR=$(cat README.md)" >> $GITHUB_ENV
+          echo $GITHUB_ENV
       - name: Send telegram message
         uses: appleboy/telegram-action@master
         with:
