@@ -1,4 +1,3 @@
-- Dom 28/11 PED AM MingroneValentina Fabrizio
-- Gio 02/12 PED PM Antonio (turno solitario)
-- Ven 03/12 PED PM ValentinaBacchi (turno solitario)
-- Sab 04/12 PED PM MingroneValentina Marco
+- Dom 28/11 PED AM Fabrizio (turno solitario)
+- Ven 03/12 PED PM ValentinaBacchi Antonio
+- Sab 04/12 PED PM Marco (turno solitario)
