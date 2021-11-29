@@ -19,13 +19,13 @@ jobs:
         continue-on-error: true
         run: |
           ls -las
-          # git config --global user.email "you@example.com"
-          # git config --global user.name "Github Action"
-          # pip3 install -r requirements.txt
-          # python3 read.py
-          # git add README.md
-          # git commit -m "update"
-          # git push
+          git config --global user.email "you@example.com"
+          git config --global user.name "Github Action"
+          pip3 install -r requirements.txt
+          python3 read.py
+          git add README.md
+          git commit -m "update"
+          git push
           export CHANGELOG="$(cat README.md)"
           echo "$CHANGELOG"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
@@ -41,9 +41,5 @@ jobs:
           message: |
             Ciao Nasi!
             
-            Ecco i turni:
-            
+            Ecco i turni della settimana:
             ${{ steps.fileaction.outputs.FILE }}
-
-            $(cat README.md)
-           
