@@ -36,5 +36,6 @@ df = df[df["curweek"] == df["week"]]
 df = df[["date", "week", "day", "text"] + [x for x in df.columns if "p_" in x]]
 df["s"] = df[[x for x in df.columns if "p_" in x]].agg(' '.join, axis=1).apply(lambda x: re.sub(' +', ' ', x).strip())
 df = df[df["s"].apply(lambda x: x != "")]
+df["s"] = df["s"].apply(lambda x: x if " " in x else x + " (turno solitario)")
 print(df[["week", "date", "day", "text", "s"]].to_markdown())
 df.apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("README.md", index=False, header=False)
