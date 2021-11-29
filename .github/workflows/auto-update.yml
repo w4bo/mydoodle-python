@@ -15,7 +15,8 @@ jobs:
         with:
           persist-credentials: true
           ref: main
-      - name: Checkout commit
+      - name: Run
+        continue-on-error: true
         run: |
           ls -las
           git config --global user.email "you@example.com"
