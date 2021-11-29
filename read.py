@@ -3,8 +3,9 @@ import pandas as pd
 import datetime as dt
 import re 
 
-d = Doodle(url="https://doodle.com/poll/6c9nrmyeyt5gcih3")
-# d = Doodle(url="https://doodle.com/poll/6a275rvfdyuqmfux")
+url = "https://doodle.com/poll/6a275rvfdyuqmfux" # dicembre 2021
+# url = "https://doodle.com/poll/6c9nrmyeyt5gcih3" # novembre 2021
+d = Doodle(url=url)
 df = pd.DataFrame(d.options, columns=["date", "start", "text"])
 df["week"] = df["date"].apply(lambda x: (x + dt.timedelta(days=1)).week)
 
@@ -32,7 +33,7 @@ for p, preferences in d.participants:
     i += 1
 df["curweek"] = dt.datetime.now()
 df["curweek"] = df["curweek"].apply(lambda x: (x + dt.timedelta(days=1)).week)
-df = df[df["curweek"] == df["week"]]
+df = df[(df["curweek"] + 1) == df["week"]]
 df = df[["date", "week", "day", "text"] + [x for x in df.columns if "p_" in x]]
 df["s"] = df[[x for x in df.columns if "p_" in x]].agg(' '.join, axis=1).apply(lambda x: re.sub(' +', ' ', x).strip())
 df = df[df["s"].apply(lambda x: x != "")]
