@@ -26,9 +26,9 @@ jobs:
           # git add README.md
           # git commit -m "update"
           # git push
-          echo "TESTVAR=$(cat README.md)" >> $GITHUB_ENV
-          echo $GITHUB_ENV
-          echo "::set-output name=FILE::$(cat README.md)"
+          export TESTVAR="$(cat README.md)"
+          echo "$TESTVAR"
+          echo "::set-output name=FILE::$(echo "TESTVAR)"
         id: fileaction
       - name: Send telegram message
         uses: appleboy/telegram-action@master
@@ -42,7 +42,5 @@ jobs:
             
             ${{ steps.fileaction.outputs.FILE }}
 
-            ${{ env.TESTVAR }}
-            
             $(cat README.md)
            
