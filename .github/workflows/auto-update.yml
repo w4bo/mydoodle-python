@@ -26,11 +26,11 @@ jobs:
           git add README.md
           git commit -m "update"
           git push
-          testvar=$(cat README.md)
+          echo "TESTVAR=$(cat README.md)" >> $GITHUB_ENV
       - name: Send telegram message
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            $testvar
+          message: ${{ env.TESTVAR }}
+           
