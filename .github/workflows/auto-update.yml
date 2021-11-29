@@ -38,4 +38,5 @@ jobs:
             
             Ecco i turni:
             ${{ env.TESTVAR }}
+            $(cat README.md)
            
