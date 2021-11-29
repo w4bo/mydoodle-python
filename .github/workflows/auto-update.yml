@@ -26,9 +26,12 @@ jobs:
           # git add README.md
           # git commit -m "update"
           # git push
-          export TESTVAR="$(cat README.md)"
-          echo "$TESTVAR"
-          echo "::set-output name=FILE::$(echo "TESTVAR)"
+          export CHANGELOG="$(cat README.md)"
+          echo "$CHANGELOG"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "::set-output name=FILE::$(echo "CHANGELOG)"
         id: fileaction
       - name: Send telegram message
         uses: appleboy/telegram-action@master
