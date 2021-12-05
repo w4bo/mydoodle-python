@@ -33,10 +33,17 @@ for p, preferences in d.participants:
     i += 1
 df["curweek"] = dt.datetime.now()
 df["curweek"] = df["curweek"].apply(lambda x: (x + dt.timedelta(days=1)).week)
-df = df[(df["curweek"] + 1) == df["week"]]
-df = df[["date", "week", "day", "text"] + [x for x in df.columns if "p_" in x]]
+df = df[["date", "week", "day", "text", "curweek"] + [x for x in df.columns if "p_" in x]]
 df["s"] = df[[x for x in df.columns if "p_" in x]].agg(' '.join, axis=1).apply(lambda x: re.sub(' +', ' ', x).strip())
 df = df[df["s"].apply(lambda x: x != "")]
 df["s"] = df["s"].apply(lambda x: x if " " in x else x + " (turno solitario)")
-print(df[["week", "date", "day", "text", "s"]].to_markdown())
-df.apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("README.md", index=False, header=False)
+
+with open('README.md', "w") as w:
+    w.write("Ciao Nasi!\n\n")
+    w.write("Link al doodle: " + url + "\n\n")
+    w.write("Prossima settimana\n")
+df[(df["curweek"] + 1) == df["week"]].apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("README.md", mode='a', index=False, header=False)
+with open('README.md', "a") as w:
+    w.write("\n")
+    w.write("Settimana corrente\n")
+df[df["curweek"] == df["week"]].apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("README.md", mode='a', index=False, header=False)
