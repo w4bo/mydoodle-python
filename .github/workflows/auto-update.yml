@@ -41,8 +41,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            Ciao Nasi!
-            
-            Ecco i turni della settimana:
-            
             ${{ steps.fileaction.outputs.FILE }}
