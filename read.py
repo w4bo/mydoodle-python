@@ -42,7 +42,7 @@ df["s"] = df["s"].apply(lambda x: x if " " in x else x + " (turno solitario)")
 
 def turni_coperti(df, week=0):
     turni = df[((df["curweek"] + 1) == df["week"]) & (~df["s"].str.contains("solitario"))]["s"].count()
-    return str(turni) + (":pensive: 😔" if turni >= 0 else "") 
+    return str(turni) + (" 😔" if turni == 0 else "") 
 
 with open('README.md', "w") as w:
     w.write("Ciao Nasi!\n\n")
