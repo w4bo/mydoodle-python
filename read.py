@@ -38,7 +38,7 @@ df["curweek"] = df["curweek"].apply(lambda x: (x + dt.timedelta(days=1)).week)
 df = df[["date", "week", "day", "text", "curweek"] + [x for x in df.columns if "p_" in x]]
 df["s"] = df[[x for x in df.columns if "p_" in x]].agg(' '.join, axis=1).apply(lambda x: re.sub(' +', ', ', x.strip()).replace("-", " "))
 df = df[df["s"].apply(lambda x: x != "")]
-df["s"] = df["s"].apply(lambda x: x if " " in x else x + " (turno solitario)")
+df["s"] = df["s"].apply(lambda x: x if ", " in x else x + " (turno solitario)")
 
 def turni_coperti(df, week=0):
     turni = df[((df["curweek"] + week) == df["week"]) & (~df["s"].str.contains("solitario"))]["s"].count()
