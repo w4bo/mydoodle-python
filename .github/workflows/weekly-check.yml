@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 12 * * *' # ogni giorno alle 12
+    - cron: '0 12 * * SAT' # ogni sabato alle 12
 jobs:
   doodle:
     runs-on: ubuntu-latest
