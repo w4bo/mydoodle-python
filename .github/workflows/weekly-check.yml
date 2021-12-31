@@ -1,4 +1,4 @@
-name: Doodle
+name: weekly-check
 on:
   workflow_dispatch:
   push:
