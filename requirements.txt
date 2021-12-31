@@ -4,4 +4,5 @@ tabulate==0.8.9
 urllib3
 notebook
 xlrd
+pytz
 matplotlib
