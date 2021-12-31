@@ -6,6 +6,20 @@ import datetime as dt
 import re 
 from datetime import date, timedelta
 
+def transcode(x):
+    if "Matteo F" in x:
+        return "Matteo Francia"
+    elif "Antonio" in x:
+        return "Antonio Castagnola"
+    elif "Laura" in x:
+        return "Laura Tarsitano"
+    elif "Gabriella" in x:
+        return "Gabriella"
+    elif "Silvia Pimpinella" in x:
+        return "Silvia Severi"
+    else:
+        return x
+
 # According to the same ISO specification, January 4th is always 
 # going to be week 1 of a given year. By the same calculation, +
 # the 28th of December is then always in the last week of the year. 
@@ -27,6 +41,7 @@ for url in reversed(urls):
     d = Doodle(url=url)
     df = pd.DataFrame(d.options, columns=["date", "start", "text"])
     df["week"] = df["date"].apply(lambda x: (x + dt.timedelta(days=1)).week)
+    df["month"] = df["date"].apply(lambda x: x.month)
 
     def e2i(x):
         if "Mon" in x:
@@ -45,22 +60,24 @@ for url in reversed(urls):
             return "Dom"
 
     df['day'] = df[['date']].apply(lambda x: e2i(dt.datetime.strftime(x['date'], '%A')), axis=1)
-    
+    0
     i = 0
     for p, preferences in d.participants:
-        df["p_" + str(i) + p] = preferences
-        df["p_" + str(i) + p] = df["p_" + str(i) + p].apply(lambda x: p.replace(" ", "-") if x == 1 else "")
+        p = transcode(p)
+        df["p" + str(i) + "_" + p] = preferences
+        df["p" + str(i) + "_" + p] = df["p" + str(i) + "_" + p].apply(lambda x: p.replace(" ", "-") if x == 1 else "")
         i += 1
 
     # df = df.astype(str).replace('nan', '')
     dff = dff.append(df)
     print(len(dff.index))
-df = dff
 
+df = dff
 df["curweek"] = dt.datetime.now()
 df["curweek"] = df["curweek"].apply(lambda x: (x + dt.timedelta(days=1)).week)
-df = df[["date", "week", "day", "text", "curweek"] + [x for x in df.columns if "p_" in x]]
-df["s"] = df[[x for x in df.columns if "p_" in x]].astype(str).replace('nan', '').agg(' '.join, axis=1).apply(lambda x: re.sub(' +', ', ', x.strip()).replace("-", " "))
+df["curmonth"] = df["curweek"].apply(lambda x: dt.datetime.now().month)
+df = df[["date", "month", "week", "day", "text", "curmonth", "curweek"] + [x for x in df.columns if "_" in x]]
+df["s"] = df[[x for x in df.columns if "_" in x]].astype(str).replace('nan', '').agg(' '.join, axis=1).apply(lambda x: re.sub(' +', ', ', x.strip()).replace("-", " "))
 df = df[df["s"].apply(lambda x: x != "")]
 df["s"] = df["s"].apply(lambda x: x if ", " in x else x + " (turno solitario)")
 
@@ -84,3 +101,33 @@ with open('README.md', "a") as w:
     w.write("\n")
     w.write("Settimana corrente\n")
 df[df["curweek"] == df["week"]].apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("README.md", mode='a', index=False, header=False, sep=";")
+
+# Turni mensili
+df_month = df[(df["curmonth"] == df["month"]) & (~df["s"].str.contains("solitario"))]
+df_month.apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("turni_mensili.txt", mode='w', index=False, header=False, sep=";")
+
+s = """
+Ciao Nasi!
+
+Ecco i turni mensili:
+{mensili}
+Chi ha fatto almeno un turno deve (il prima possibile):
+- Confermare la correttezza del file Excel rispondendo a questa e-mail
+- Inviare il RIMBORSO KM ed eventuale RIMBORSO SCONTRINO
+
+Un paio di statistiche:
+- I clown attivi sono {attivi}
+- I turni coperti sono {turni}
+
+Grazie
+
+PS. 
+- Mantenete il doodle aggiornato (e.g., quando salta un turno)
+- Modificate il doodle *senza* duplicare le vostre votazioni (e.g., quando cancellate/aggiungete turni)
+"""
+
+turni = df_month.shape[0]
+attivi = len(set([x.split("_")[1] for x in df_month.columns if "_" in x and df_month[x].fillna("").apply(lambda x: 0 if x == "" else 1).sum() > 0]))
+with open("turni_mensili.txt", 'r') as f:
+    a = f.read()
+    print(s.format(mensili=a, attivi=attivi, turni=turni))
