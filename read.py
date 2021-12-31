@@ -112,7 +112,7 @@ Ciao Nasi!
 Ecco i turni mensili:
 {mensili}
 Chi ha fatto almeno un turno deve (il prima possibile):
-- Confermare la correttezza del file Excel rispondendo a questa e-mail
+- Confermarne la correttezza rispondendo a questa e-mail
 - Inviare il RIMBORSO KM ed eventuale RIMBORSO SCONTRINO
 
 Un paio di statistiche:
