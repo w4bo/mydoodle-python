@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 12 * * *' # at the end of each day
+    - cron: '0 12 28 * *' # ogni 28 del mese
 jobs:
   doodle:
     runs-on: ubuntu-latest
@@ -19,16 +19,11 @@ jobs:
         continue-on-error: true
         run: |
           ls -las
-          git config --global user.email "you@example.com"
-          git config --global user.name "Github Action"
           pip3 install -r requirements.txt
           python3 read.py
-          git add README.md
-          git commit -m "update"
-          git push
       - name: Export turni
         run: |
-          export CHANGELOG="$(cat README.md)"
+          export CHANGELOG="$(cat turni_mensili.txt)"
           echo "$CHANGELOG"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"

@@ -130,4 +130,6 @@ turni = df_month.shape[0]
 attivi = len(set([x.split("_")[1] for x in df_month.columns if "_" in x and df_month[x].fillna("").apply(lambda x: 0 if x == "" else 1).sum() > 0]))
 with open("turni_mensili.txt", 'r') as f:
     a = f.read()
-    print(s.format(mensili=a, attivi=attivi, turni=turni))
+
+with open("turni_mensili.txt", 'w') as f:
+    f.write(s.format(mensili=a, attivi=attivi, turni=turni))

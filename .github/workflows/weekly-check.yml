@@ -1,0 +1,39 @@
+name: Doodle
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 12 * * *' # ogni giorno alle 12
+jobs:
+  doodle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: true
+          ref: main
+      - name: Run
+        continue-on-error: true
+        run: |
+          ls -las
+          pip3 install -r requirements.txt
+          python3 read.py
+      - name: Export turni
+        run: |
+          export CHANGELOG="$(cat README.md)"
+          echo "$CHANGELOG"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "::set-output name=FILE::$(echo "$CHANGELOG")"
+        id: fileaction
+      - name: Send telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ steps.fileaction.outputs.FILE }}
