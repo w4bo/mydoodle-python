@@ -6,3 +6,4 @@ notebook
 xlrd
 pytz
 matplotlib
+pandas
