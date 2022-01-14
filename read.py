@@ -92,15 +92,15 @@ def turni_coperti(df, week=0):
     turni = df[(df["curweek"].apply(lambda x: next_w(x, week)) == df["week"]) & (~df["s"].str.contains("solitario"))]["s"].count()
     return str(turni) + (" 😔" if turni == 0 else "") 
 
-with open('README.md', "w") as w:
+with open('turni_settimanali.txt', "w") as w:
     w.write("Ciao Nasi!\n\n")
     w.write("Link al doodle: " + url + "\n\n")
     w.write("Prossima settimana, turni coperti: " + turni_coperti(df, 1) + "\n")
-df[df["curweek"].apply(lambda x: next_w(x, 1)) == df["week"]].apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("README.md", mode='a', index=False, header=False, sep=";")
-with open('README.md', "a") as w:
+df[df["curweek"].apply(lambda x: next_w(x, 1)) == df["week"]].apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("turni_settimanali.txt", mode='a', index=False, header=False, sep=";")
+with open('turni_settimanali.txt', "a") as w:
     w.write("\n")
     w.write("Settimana corrente\n")
-df[df["curweek"] == df["week"]].apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("README.md", mode='a', index=False, header=False, sep=";")
+df[df["curweek"] == df["week"]].apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("turni_settimanali.txt", mode='a', index=False, header=False, sep=";")
 
 # Turni mensili
 df_month = df[(df["curmonth"] == df["month"]) & (~df["s"].str.contains("solitario"))]

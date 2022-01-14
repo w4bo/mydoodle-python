@@ -1,4 +1,5 @@
 turni_mensili.txt
+turni_settimanali.txt
 outputs/*.csv
 results/dummy.pdf
 metastore_db/

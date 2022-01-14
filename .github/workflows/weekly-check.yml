@@ -22,7 +22,7 @@ jobs:
           python3 read.py
       - name: Export turni
         run: |
-          export CHANGELOG="$(cat README.md)"
+          export CHANGELOG="$(cat turni_settimanali.txt)"
           echo "$CHANGELOG"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
