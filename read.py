@@ -29,6 +29,7 @@ def weeks_for_year(year=dt.datetime.now().year):
     return last_week.isocalendar()[1]
 
 urls = [
+    "https://doodle.com/poll/5ran7iwhqx9mbki4", # febbraio 2022
     "https://doodle.com/poll/zyuwdmw5s5np5umx", # gennaio 2022
     "https://doodle.com/poll/6a275rvfdyuqmfux", # dicembre 2021
     "https://doodle.com/poll/6c9nrmyeyt5gcih3"  # novembre 2021
