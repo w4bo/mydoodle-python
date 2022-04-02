@@ -29,7 +29,7 @@ def weeks_for_year(year=dt.datetime.now().year):
     return last_week.isocalendar()[1]
 
 urls = [
-    "https://doodle.com/meeting/participate/id/1aK3r38a", # aprile 2022
+    # "https://doodle.com/meeting/participate/id/1aK3r38a", # aprile 2022
     "https://doodle.com/poll/hstku4b2yav7vsv5", # marzo 2022
     "https://doodle.com/poll/5ran7iwhqx9mbki4", # febbraio 2022
     "https://doodle.com/poll/zyuwdmw5s5np5umx", # gennaio 2022
@@ -106,7 +106,7 @@ with open('turni_settimanali.txt', "a") as w:
 df[df["curweek"] == df["week"]].apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("turni_settimanali.txt", mode='a', index=False, header=False, sep=";")
 
 # Turni mensili
-df_month = df[(df["curmonth"] == df["month"]) & (~df["s"].str.contains("solitario"))]
+df_month = df[(df["curmonth"] -1 == df["month"]) & (~df["s"].str.contains("solitario"))]
 df_month.apply(lambda x: "- " + x["day"] + " " + str(x["date"].strftime("%d/%m")) + " " +  x["text"] + " " + x["s"], axis=1).to_csv("turni_mensili.txt", mode='w', index=False, header=False, sep=";")
 
 s = """
