@@ -17,7 +17,6 @@ jobs:
           URL=${{ secrets.URL }}
           curl -X GET "$URL&monthly=true" > turni.txt
           export CHANGELOG="$(cat turni.txt)"
-          echo "$CHANGELOG"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
