@@ -15,8 +15,7 @@ jobs:
       - name: Export turni
         run: |
           URL=${{ secrets.URL }}
-          echo URL
-          curl -X GET "$URL&monthly=true" > turni_settimanali.txt
+          curl -X GET "$URL&weekly=true" > turni_settimanali.txt
           export CHANGELOG="$(cat turni_settimanali.txt)"
           echo "$CHANGELOG"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
