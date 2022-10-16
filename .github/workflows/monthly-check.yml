@@ -14,8 +14,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Export turni
         run: |
-          curl -X GET "${{ secrets.URL }}&monthly=true" > turni_mensili.txt
-          export CHANGELOG="$(cat turni_mensili.txt)"
+          URL=${{ secrets.URL }}
+          curl -X GET "$URL&monthly=true" > turni.txt
+          export CHANGELOG="$(cat turni.txt)"
           echo "$CHANGELOG"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
