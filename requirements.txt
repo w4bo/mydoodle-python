@@ -11,4 +11,4 @@ scipy==1.11.3
 sklearn==0.0.post9
 notebook==7.0.4
 matplotlib==3.8.0
-seaborn==0.12.2
+seaborn==0.13.0
