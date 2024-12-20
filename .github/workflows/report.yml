@@ -1,4 +1,4 @@
-name: monthly-check
+name: report
 on:
   workflow_dispatch:
   push:
