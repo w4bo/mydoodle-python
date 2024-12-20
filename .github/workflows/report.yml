@@ -21,6 +21,7 @@ jobs:
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
           echo "::set-output name=FILE::$(echo "$CHANGELOG")"
+          cat turni.txt
         id: fileaction
       - name: Send telegram message
         uses: appleboy/telegram-action@master
