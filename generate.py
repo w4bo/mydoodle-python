@@ -2,7 +2,7 @@
 import re
 from pathlib import Path
 
-with open("turni.txt", "r", encoding="utf-8") as file:
+with open("report.txt", "r", encoding="utf-8") as file:
     file_content = file.read()
     sections = re.split(r"(?=---.+?---)", file_content.strip())
 
