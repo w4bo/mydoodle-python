@@ -49,7 +49,7 @@ jobs:
           # Optional converting Markdown to HTML (set content_type to text/html too):
           convert_markdown: true
           # Optional attachments:
-          attachments: ${{ steps.fileaction.outputs.FILE }}
+          attachments: turni.txt
       - name: Send telegram message
         uses: appleboy/telegram-action@master
         with:
