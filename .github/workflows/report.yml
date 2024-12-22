@@ -43,7 +43,7 @@ jobs:
           # Required sender full name (address can be skipped):
           from: Turni Nasi
           # Optional HTML body read from file:
-          html_body: file://${{ steps.fileaction.outputs.FILE }}
+          # html_body: file://${{ steps.fileaction.outputs.FILE }}
           # Optional carbon copy recipients:
           ignore_cert: true
           # Optional converting Markdown to HTML (set content_type to text/html too):
