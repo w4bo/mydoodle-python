@@ -1,6 +1,6 @@
 # nutrition-irrigation-model-1.2.0
 
-FROM python:3.12-slim
+FROM python:3.13-slim
 
 RUN mkdir /src
 # Copy REQUIREMENT_FILE in src folder
