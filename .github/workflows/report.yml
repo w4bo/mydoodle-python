@@ -18,7 +18,7 @@ jobs:
           curl -X GET "$URL&report=true" > report.txt
           curl -X GET "$URL&yearly=true" > turni.txt
 
-          docker-compose up
+          docker compose up
         id: fileaction
       - name: Send mail
         uses: dawidd6/action-send-mail@v4
