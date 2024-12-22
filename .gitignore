@@ -4,6 +4,9 @@ outputs/*.csv
 results/dummy.pdf
 metastore_db/
 derby.log
+*.txt
+*.md
+*.pdf
 
 # These are useless since we use gradle import
 .idea/

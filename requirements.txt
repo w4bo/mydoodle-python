@@ -11,3 +11,4 @@ scipy==1.14.1
 notebook==7.3.2
 matplotlib==3.10.0
 seaborn==0.13.2
+mdpdf==0.0.18
