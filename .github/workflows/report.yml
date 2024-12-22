@@ -23,6 +23,33 @@ jobs:
           echo "::set-output name=FILE::$(echo "$CHANGELOG")"
           cat turni.txt
         id: fileaction
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v4
+        with:
+          # Required mail server address if not connection_url:
+          server_address: smtp.gmail.com
+          # Server port, default 25:
+          server_port: 465
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          # Optional (recommended) mail server username:
+          username: ${{secrets.MAIL_USERNAME}}
+          # Optional (recommended) mail server password:
+          password: ${{secrets.MAIL_PASSWORD}}
+          # Required mail subject:
+          subject: "[Nasi rossi] Report turni"
+          # Required recipients' addresses:
+          to: ${{secrets.MAIL_TO}}
+          # Required sender full name (address can be skipped):
+          from: Turni Nasi
+          # Optional HTML body read from file:
+          html_body: file://${{ steps.fileaction.outputs.FILE }}
+          # Optional carbon copy recipients:
+          ignore_cert: true
+          # Optional converting Markdown to HTML (set content_type to text/html too):
+          convert_markdown: true
+          # Optional attachments:
+          attachments: ${{ steps.fileaction.outputs.FILE }}
       - name: Send telegram message
         uses: appleboy/telegram-action@master
         with:
