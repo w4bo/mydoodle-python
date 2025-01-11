@@ -6,7 +6,7 @@ notebook==7.3.2
 xlrd==2.0.1
 pytz==2024.2
 pandas==2.2.3
-scikit-learn==1.6.0
+scikit-learn==1.6.1
 scipy==1.15.0
 notebook==7.3.2
 matplotlib==3.10.0
