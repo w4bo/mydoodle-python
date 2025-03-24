@@ -15,7 +15,7 @@ jobs:
       - name: Export turni
         run: |
           URL=${{ secrets.URL }}
-          curl -X GET "https://big.csr.unibo.it/projects/redirect/?url=http%3A%2F%2F137.204.70.156%3A48083%2FMyDoodle%2FMyDoodle&token=ATsMdSxyZP&weekly=true" > turni_settimanali.txt
+          curl -X GET "https://big.csr.unibo.it/tomcat9/MyDoodle/MyDoodle?token=ATsMdSxyZP&weekly=true" > turni_settimanali.txt
           export CHANGELOG="$(cat turni_settimanali.txt)"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
