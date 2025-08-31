@@ -9,6 +9,6 @@ pandas==2.3.2
 scikit-learn==1.7.1
 scipy==1.16.1
 notebook==7.4.5
-matplotlib==3.10.5
+matplotlib==3.10.6
 seaborn==0.13.2
 mdpdf==0.0.18
