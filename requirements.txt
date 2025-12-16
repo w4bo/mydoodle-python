@@ -2,13 +2,13 @@ requests==2.32.5
 six==1.17.0
 tabulate==0.9.0
 urllib3==2.6.2
-notebook==7.5.0
+notebook==7.5.1
 xlrd==2.0.2
 pytz==2025.2
 pandas==2.3.3
 scikit-learn==1.8.0
 scipy==1.16.3
-notebook==7.5.0
+notebook==7.5.1
 matplotlib==3.10.8
 seaborn==0.13.2
 mdpdf==0.0.18
