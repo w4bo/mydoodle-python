@@ -1,4 +1,4 @@
-requests==2.33.0
+requests==2.33.1
 six==1.17.0
 tabulate==0.10.0
 urllib3==2.6.3
