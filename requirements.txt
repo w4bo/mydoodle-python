@@ -1,7 +1,7 @@
 requests==2.34.2
 six==1.17.0
 tabulate==0.10.0
-urllib3==2.7.0
+urllib3==2.8.0
 notebook==7.6.2
 xlrd==2.0.2
 pytz==2026.3.post1
