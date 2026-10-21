@@ -37,6 +37,7 @@ jobs:
           subject: "[Nasi rossi] Report turni"
           # Required recipients' addresses:
           to: ${{secrets.MAIL_TO}}
+          from: ${{secrets.MAIL_FROM}}
           # Required sender full name (address can be skipped):
           envelope_from: Turni Nasi
           # Optional HTML body read from file:
