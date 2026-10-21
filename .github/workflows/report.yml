@@ -38,7 +38,7 @@ jobs:
           # Required recipients' addresses:
           to: ${{secrets.MAIL_TO}}
           # Required sender full name (address can be skipped):
-          from: Turni Nasi
+          envelope_from: Turni Nasi
           # Optional HTML body read from file:
           # html_body: file://${{ steps.fileaction.outputs.FILE }}
           # Optional carbon copy recipients:
